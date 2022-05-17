@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grupa B</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+    <style type="text/css">
+        /* Ovde uneti CSS */
+        body {
+            margin:0;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #000;
+            color: #ff0;
+            text-align: center;
+            padding: 1em;
+            font: normal 1.5em/1em arial,sans-serif;
+        }
+        header>input,
+        header>button {
+            text-align: center;
+            border-radius: 20px;
+            font: normal 1em/1em arial,sans-serif;
+        }
+        header>input {
+            width: 3em;
+        }
+        header>button {
+            color: #fff;
+            padding: 0.1em;
+            background: #bd1c83;
+        }
+        header>button:hover {
+            background: #1f3663;
+        }
+        aside { margin-top: 6em; }
+        aside>nav>ul,
+        aside>nav>ul>li>ul {
+            width:250px;
+            list-style-type: none;
+            padding:0;
+        }
+        aside>nav>ul>li a {
+            background:#bd1c83;
+            color:#fff;
+            font-size:1.5em;
+            font-family:Verdana, arial, sans-serif;
+            text-decoration: none;
+            display:block;
+        }
+        aside>nav>ul>li a:hover {
+            background: #1f3663;
+        }
+        aside>nav>ul>li {
+            position: relative;
+        }
+        aside>nav>ul>li>ul {
+            position:absolute;
+            left:250px;
+            top: 0;
+            display: none;
+            overflow:hidden;
+            transition:all 0.3s;
+        }
+        aside>nav>ul>li:hover>ul {
+            display: block;
+        }
+        .more {
+            display:inline-block;
+        }
+        .less {
+            display:none;
+        }
+        a:hover .more {
+            display:none;
+        }
+        a:hover .less {
+            display:inline-block;
+        }
+        main {
+            width:100%;
+            height:100%;
+            position:fixed;
+            background:#ff0;
+            top:0;
+            left:0;
+            z-index:-1;
+        }
+        .krug {
+            position:absolute;
+            background-color:#fff;
+            border-radius:50%;
+            top:300px;
+            left:600px;
+            width:50px;
+            height:50px;
+        }
+    </style>
+    <script>
+        /* Ovde uneti JavaScript / jQuery */
+        function rnd(min, max) {
+            return Math.round(Math.random() * (max-min) + min);
+        }
+        $(function() {
+            $('header>button').on('click', function(e){
+                let min = parseInt($('#min').val());
+                let max = parseInt($('#max').val());
+                let R = rnd(min, max);
+                let x = rnd(0, window.innerWidth);
+                let y = rnd(0, window.innerHeight);
+                $('main').append('<div class="krug" style="width:'+R+'px;height:'+R+'px;left:'+x+'px;top:'+y+'px"></div>')
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <label for="min">Минимум</label>
+        <input type="number" name="min" id="min" value="20">
+        <label for="max">Максимум</label>
+        <input type="number" name="max" id="max" value="200">
+        <button>Постави круг</button>
+    </header>
+    <aside>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Почетна страна</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Претраживачи<span class="more">+</span><span class="less">-</span></a>
+                    <ul>
+                        <li>
+                            <a href="https://google.com" target="_blank">Google</a>
+                        </li>
+                        <li>
+                            <a href="https://www.yahoo.com" target="_blank">Yahoo!</a>
+                        </li>
+                        <li>
+                            <a href="https://www.bing.com" target="_blank">Bing</a>
+                        </li>
+                        <li>
+                            <a href="https://yandex.ru" target="_blank">Yandex</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">Вести<span class="more">+</span><span class="less">-</span></a>
+                    <ul>
+                         <li>
+                            <a href="https://www.rts.rs" target="_blank">RTS</a>
+                        </li>
+                        <li>
+                            <a href="https://www.politika.rs" target="_blank">Politika</a>
+                        </li>
+                        <li>
+                            <a href="https://www.novosti.rs" target="_blank">Večernje novosti</a>
+                        </li>
+                        <li>
+                            <a href="https://www.blic.rs" target="_blank">Blic</a>
+                        </li>
+                        <li>
+                            <a href="https://www.b92.net" target="_blank">B92</a>
+                        </li>
+                        <li>
+                            <a href="https://www.kurir.rs" target="_blank">Kurir</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="onama.html">О нама</a>
+                </li>
+                
+                <li>
+                    <a href="kontakt.html">Контакт</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main></main>
+</body>
+</html>
