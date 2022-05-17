@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grupa A</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        body, h1, p {
+            margin: 0;
+        }
+        body {
+            cursor: pointer;
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+        }
+        header>nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        header>nav>ul {
+            display: flex;
+            justify-content: center;
+        }
+        header>nav>ul>li { position: relative }
+
+        header>nav>ul a {
+            text-decoration: none;
+            display: block;
+            background: #1f3663;
+            color: #fff;
+            padding: 0.3em 2em;
+            font-size: 2em;
+            font-family:verdana, arial, sans-serif;
+            text-align: center;
+            transition: all 0.3s;
+
+        }
+        header>nav>ul a:hover {
+            background: #bd1c83;
+        }
+        header>nav>ul>li>a { border-bottom: solid 1px #fff }
+        header>nav>ul>li:first-child>a { border-radius: 0 0 0 20px }
+        header>nav>ul>li:last-child>a { border-radius: 0 0 20px 0 }
+        
+        header>nav>ul>li>ul {
+            display: block;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            position: absolute;
+            font-size: 0.5em;
+            transition: all 0.5s;
+        }
+        header>nav>ul>li:hover>ul {
+            max-height: 100vh;
+        }
+        main {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 320px;
+            height: 200px;
+            color: #fff;
+            font-family: monospace;
+            font-size: 2em;
+            overflow-y: scroll;
+            background: url('pozadina.jpg');
+        }
+        main h1 {
+            line-height: 1em;
+            font-size: 2em;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 2em;
+            background: #000;
+            color: #ff0;
+            font-family: monospace;
+            text-align: center;
+            font-size: 2em;
+            padding: 0.4em;
+            z-index: 3;
+        }
+        footer input[type="number"] {
+            background: #ff0;
+            font: normal 1.2em/1.2em monospace;
+            width: 3em;
+            text-align: center;
+        }
+        .krug {
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('body').on('click', function(e) {
+                if (e.pageY > window.innerHeight - 80) {
+                    return;
+                }
+                let r = parseInt($('#poluprecnik').val());
+                let x = Math.round(e.pageX - r);
+                let y = Math.round(e.pageY - r);
+                
+                let color = $('#boja').val();
+                $('body').append('<div class="krug" ' + 
+                    'style="width:' + (r * 2) + 'px;' +
+                    'height:' + (r * 2) + 'px;' +
+                    'top:' + y + 'px;' +
+                    'left:' + x + 'px;' +
+                    'background:' + color + '"></div>');
+                $('.krug').off('click');
+                $('.krug').on('click', function(e) {
+                    $(this).remove();
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Početna strana</a>
+                </li>
+                <li>
+                    <a href="#">Pretraživači</a>
+                    <ul>
+                        <li>
+                            <a href="https://google.com" target="_blank">Google</a>
+                        </li>
+                        <li>
+                            <a href="https://www.yahoo.com" target="_blank">Yahoo!</a>
+                        </li>
+                        <li>
+                            <a href="https://www.bing.com" target="_blank">Bing</a>
+                        </li>
+                        <li>
+                            <a href="https://yandex.ru" target="_blank">Yandex</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#">Vesti</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.rts.rs" target="_blank">RTS</a>
+                        </li>
+                        <li>
+                            <a href="https://www.politika.rs" target="_blank">Politika</a>
+                        </li>
+                        <li>
+                            <a href="https://www.novosti.rs" target="_blank">Večernje novosti</a>
+                        </li>
+                        <li>
+                            <a href="https://www.blic.rs" target="_blank">Blic</a>
+                        </li>
+                        <li>
+                            <a href="https://www.b92.net" target="_blank">B92</a>
+                        </li>
+                        <li>
+                            <a href="https://www.kurir.rs" target="_blank">Kurir</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Први колоквијум</h1>
+        <p>Кликом било где на страници, приказује се круг на месту на коме је кликнуто, оном бојом која је задата у пољу за одабир боје. Кликом на круг, он се уклања са странице, и на месту клика појављује нови круг.</p>
+    </main>
+    <footer>
+        <label for="boja">Боја</label>
+        <input type="color" name="boja" id="boja">&nbsp;&nbsp;
+        <label for="poluprecnik">Полупречник</label>
+        <input type="number" name="poluprecnik" id="poluprecnik" value="50">
+    </footer>
+</body>
+</html>
